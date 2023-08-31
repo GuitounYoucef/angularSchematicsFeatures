@@ -1,18 +1,18 @@
 {
   "name": "simple-feature",
-  "version": "0.0.4",
+  "version": "0.0.22",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },
   "ng-add": {
-    "save": "devDependencies"
+    "save": "true"
   },
   "schematics": "./schematics/collection.json",
   "scripts": {
 
 
     "build": "tsc -p tsconfig.schematics.json",
-    "postbuild": "copyfiles schematics/*/schema.json schematics/*/files/** schematics/collection.json ../../dist/simple-feature/"
+    "postbuild": "copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/simple-feature/"
 
   },
   "peerDependencies": {
@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  },
-  "sideEffects": false
+  }
+
 }

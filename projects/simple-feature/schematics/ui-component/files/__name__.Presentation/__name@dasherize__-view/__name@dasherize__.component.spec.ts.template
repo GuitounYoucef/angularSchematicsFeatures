@@ -1,0 +1,29 @@
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
+
+import { <%= dasherize(name) %> } from './comp.component';
+
+describe('<%= dasherize(name) %>', () => {
+  let component: <%= dasherize(name) %>;
+  let fixture: ComponentFixture<<%= dasherize(name) %>>;
+
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ <%= dasherize(name) %> ]
+    })
+    .compileComponents();
+  }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(<%= dasherize(name) %>);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+

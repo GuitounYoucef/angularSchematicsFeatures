@@ -6,7 +6,7 @@
         "factory": "./ng-add/index#ngAdd",
         "schema": "./ng-add/schema.json"
       },
-      "my-component": {
+      "ui-component": {
         "description": "This schematic generates custemised component",
         "factory": "./ui-component/index#ComponentGenerator",
         "schema": "./ui-component/schema.json",
