@@ -1,6 +1,6 @@
 {
   "name": "simple-feature",
-  "version": "0.0.22",
+  "version": "0.1.4",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },

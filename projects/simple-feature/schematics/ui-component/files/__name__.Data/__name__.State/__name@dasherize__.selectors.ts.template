@@ -1,19 +1,17 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { <%= dasherise(name) %>State } from "./<%= dasherise(name) %>.reducer";
+import { <%= dasherize(name) %>State } from "./<%= dasherize(name) %>.reducer";  
 
-export const <%= toUpperCase(name) %>_STATE_NAME='<%= dasherise(name) %>Reducer';
+export const <%= uppercase(name) %>_STATE_NAME='<%= dasherize(name) %>Red';
 
-const get<%= name %>State = createFeatureSelector<<%= dasherise(name) %>State>(<%= toUpperCase(name) %>_STATE_NAME);
-
+const get<%= name %>State = createFeatureSelector<<%= dasherize(name) %>State>(<%= uppercase(name) %>_STATE_NAME);
 
 export const selectEditing<%= name %> = createSelector(get<%= name %>State, (state) => {
     return state.<%= name %>Detail ? state.<%= name %>Detail : null;
   })
 
-
-export const select<%= name %>sList = createSelector(
+export const select<%= name %>List = createSelector(
   get<%= name %>State,
   (state) => {
-    return state.<%= dasherise(name) %>sList ? state.<%= dasherise(name) %>sList : [];
+    return state.<%= dasherize(name) %>List ? state.<%= dasherize(name) %>List : [];
   }
 );
