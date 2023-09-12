@@ -13,8 +13,9 @@
         "type": "string",
         "format": "path",
         "x-prompt": "Where should be created the file?",
-        "default": "src/app"
+        "default": "src/app/Modules"
       }
     },
     "required": []
   }
+
