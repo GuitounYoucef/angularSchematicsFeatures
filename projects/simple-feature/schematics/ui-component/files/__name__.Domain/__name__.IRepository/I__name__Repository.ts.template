@@ -2,7 +2,7 @@
 import { Observable} from "rxjs";
 import {  <%= name %> } from "../<%= name %>.Models/<%= name %>";
 
-export abstract class I<%= name %>sRepository {
+export abstract class I<%= name %>Repository {
 
     abstract get<%= name %>sList(): Observable<<%= name %>[]>
  

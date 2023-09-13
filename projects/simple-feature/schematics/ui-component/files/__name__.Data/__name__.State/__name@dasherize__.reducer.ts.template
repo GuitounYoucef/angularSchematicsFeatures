@@ -14,7 +14,7 @@ export const initialState:<%= dasherize(name) %>State={
 };
 
 /*************************************************************************************************/
-export const <%= dasherize(name) %>Reducer = createReducer(
+export const <%= name %>Reducer = createReducer(
     initialState,
   on(get<%= name %>sListSuccess, (state, action) => {
     return {

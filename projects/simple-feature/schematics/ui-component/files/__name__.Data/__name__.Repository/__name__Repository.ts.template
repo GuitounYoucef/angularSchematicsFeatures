@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { I<%= dasherize(name) %>sRepository } from "../../<%= name %>.Domain/<%= name %>s.IRepository/I<%= name %>sRepository";
+import { I<%= dasherize(name) %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
 import { Observable, map, pluck } from "rxjs";
 
 import { HttpService } from "src/app/Modules/Core/API/HttpService";
@@ -10,7 +10,7 @@ import { environment } from "src/environements/environement";
 import { HttpClient } from "@angular/common/http";
 
 @Injectable()
-export class <%= name %>sRepository extends I<%= name %>sRepository {
+export class <%= name %>Repository extends I<%= name %>Repository {
 
 
 

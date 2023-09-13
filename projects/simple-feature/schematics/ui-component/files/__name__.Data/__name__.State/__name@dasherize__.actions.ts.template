@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import {  <%= name %> } from "../../<%= name %>s.Domain/<%= name %>.Models/<%= name %>s";
+import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>s";
 
 
 export const GET_<%= uppercase(name) %>S_LIST = "[posts list] get <%= name %>s List"

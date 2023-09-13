@@ -25,7 +25,7 @@ add library to your project
 
  */
 
-export function addObjectToArrayChange (context: string, tree: Tree, nodeName:string,path:string): Change {
+export function addObjectToArrayChange (context: string, tree: Tree, nodeName:string,path:string,nodeContext:string): Change {
   const content = tree.read(path);
   let node = ts.createSourceFile(path, content!.toString(), ts.ScriptTarget.Latest, true);
   //showTree(node);
@@ -43,7 +43,7 @@ export function addObjectToArrayChange (context: string, tree: Tree, nodeName:st
   if (!providersNode || !providersNode.parent) {
     throw new SchematicsException(`providers variable in ${path}`);
   }
- return new InsertChange(path, providersNode.getEnd()+3,'\n' + context)
+ return new InsertChange(path, providersNode.getEnd()+3,'\n' + nodeContext)
 }
 
 /*
@@ -65,15 +65,17 @@ function unppercase(str: string): string {
   return str.toUpperCase();
 }
 
-function addToNode(tree: Tree,path:string,newNode: string,parentNode:string):void
+function addNode(tree: Tree,path:string,newNode: string,parentNode:string,nodeContext:string):boolean
 {
-
-  let change = addObjectToArrayChange(newNode, tree,parentNode,path);
+  
+  let change = addObjectToArrayChange(newNode, tree,parentNode,path,nodeContext);
   const declarationRecorder = tree.beginUpdate(path);
   if (change instanceof InsertChange) {
       declarationRecorder.insertLeft(change.pos,change.toAdd);
   }
+  else return false;
   tree.commitUpdate(declarationRecorder);
+  return true;
 }
 /******************************************************************************** */
 
@@ -91,28 +93,60 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.info('Adding library Module to the app...');
 
-
+    let name=options.name.toLowerCase();
+    let Name=options.name;
     // update Store file
     let path='/src/app/Modules/Core/state/app.state.ts';
-    let newNode=`${options.name}Red:${options.name}Reducer,`;
+    let newNode=`${name}Red:${Name}Reducer,`;
+    let newNodeContext=`${name}Red:${Name}Reducer,`;
     let parentNode=`appReducer`;
-    // add feature reducer to appReducer
-    addToNode(tree,path,newNode,parentNode);
-    let importNode=`import { ${options.name}Reducer } from "src/app/${options.name}/${options.name}.Data/${options.name}.State/${options.name}.reducer";`;
-    // add import reducer with path
+     addNode(tree,path,newNode,parentNode,newNodeContext);
+
+    let importNode=`import { ${Name}Reducer } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.reducer";`;
     addImportToFile(tree,path,importNode);
 
     path='/src/main.ts';
-    newNode=`provideStore`;
+
+    newNode=`{ provide: I${Name}Repository, useClass: ${Name}Repository },`;
+    newNodeContext=`{ provide: I${Name}Repository, useClass: ${Name}Repository },`;
     parentNode=`providers`;
-    // add feature reducer to appReducer
-    addToNode(tree,path,newNode,parentNode);    
+    if(addNode(tree,path,newNode,parentNode,newNodeContext))
+    {
+    importNode=`import { I${Name}Repository } from './app/Modules/${Name}/${Name}.Domain/${Name}.IRepository/I${Name}Repository';`+'\n'+`import { ${Name}Repository } from './app/Modules/${Name}/${Name}.Data/${Name}.Repository/${Name}Repository';`;
+    addImportToFile(tree,path,importNode);
+    }
+     
+
+    newNode='provideStore';
+    newNodeContext=`provideStore(appReducer),`;
+    parentNode=`providers`;
+    if(addNode(tree,path,newNode,parentNode,newNodeContext))
+    {
+      importNode=`import { provideStore } from '@ngrx/store';`+'\n'+`import { appEffects, appReducer } from './app/Modules/Core/state/app.state';`;
+      addImportToFile(tree,path,importNode);      
+    }
+
+
+    newNode=`provideEffects`;
+    newNodeContext=`provideEffects(appEffects),`;
+    parentNode=`providers`;
+    if(addNode(tree,path,newNode,parentNode,newNodeContext))    
+    {
+      importNode=`import { provideEffects } from '@ngrx/effects';`;
+      addImportToFile(tree,path,importNode);      
+    }
+
+    newNode=`provideStoreDevtools`;
+    newNodeContext=`provideStoreDevtools({ maxAge: 25, logOnly: !isDevMode() }),`;
+    parentNode=`providers`;
+    if(addNode(tree,path,newNode,parentNode,newNodeContext))
+    {
+      importNode=`import { provideStoreDevtools } from '@ngrx/store-devtools';`+'\n'+`import { isDevMode } from '@angular/core';`;
+      addImportToFile(tree,path,importNode);      
+    } 
 
     
-    newNode=`{ provide: I${options.name}sRepository, useClass: ${options.name}sRepository },`;
-    parentNode=`providers`;
-    // add feature reducer to appReducer
-    addToNode(tree,path,newNode,parentNode);  
+
 
  
 
@@ -122,9 +156,9 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
         classify: strings.classify,
         dasherize: strings.dasherize,
         uppercase: unppercase,
-        name: options.name
+        name: Name
       }),
-      move(normalize(`/${options.path}/${options.name}`))
+      move(normalize(`/${options.path}/${Name}`))
     ]
     )
     return chain([
