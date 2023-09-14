@@ -44,7 +44,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         //return this.httpClient.<%= dasherize(name) %><any>(requestURL, <%= dasherize(name) %>);
          console.log("Repository : <%= dasherize(name) %> requestURL ",requestURL)
         const options = this.httpService.createOptions(
-          HttpRequestMethod.<%= dasherize(name) %>,
+          HttpRequestMethod.post,
       //    this.httpService.createHeader(),
           requestURL,
           <%= dasherize(name) %>,
@@ -94,7 +94,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
     }    
   
     delete<%= dasherize(name) %>(<%= name %>ID:number): Observable<any>{
-        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s/${<%= dasherize(name) %>ID}`;
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s/${<%= name %>ID}`;
         const options = this.httpService.createOptions(
           HttpRequestMethod.delete,
    //       this.httpService.createHeader(),

@@ -1,0 +1,16 @@
+<div class="bg-slate-200  h-max p-10">
+<button mat-fab extended color="primary" routerLink="add">
+    <mat-icon>add</mat-icon>
+    Create <%= dasherize(name) %>
+  </button>
+
+
+
+  <div class="flex flex-wrap gap-8 m-8 flex-row" *ngIf="<%= dasherize(name) %>List$ as <%= dasherize(name) %>List">
+     
+       <div *ngFor="let item of <%= dasherize(name) %>List | async">
+       
+       </div>
+
+  </div>
+</div>

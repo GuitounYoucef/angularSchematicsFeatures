@@ -1,0 +1,31 @@
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Route, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { <%= name %>ViewModel } from '../<%= dasherize(name) %>-view-models/<%= dasherize(name) %>-view-models';
+
+@Component({
+  selector: 'app-list-<%= dasherize(name) %>',
+  templateUrl: './list-<%= dasherize(name) %>.component.html',
+  styleUrls: ['./list-<%= dasherize(name) %>.component.css'],
+  standalone: true,
+  imports: [CommonModule,
+            NgIf,
+            NgFor,
+            RouterOutlet,
+            RouterLink,
+            RouterLinkActive,
+            ]            
+})
+
+export class List<%= name %>Component implements OnInit {
+  
+  <%= dasherize(name) %>List$=this.<%= dasherize(name) %>ViewModel.<%= dasherize(name) %>List$;
+  
+  constructor(private <%= dasherize(name) %>ViewModel:<%= name %>ViewModel,
+               ) { }
+
+  ngOnInit() {
+    this.<%= dasherize(name) %>ViewModel.get<%= name %>List();    
+  }
+
+}

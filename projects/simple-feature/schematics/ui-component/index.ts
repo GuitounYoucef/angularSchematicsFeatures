@@ -43,7 +43,7 @@ export function addObjectToArrayChange (context: string, tree: Tree, nodeName:st
   if (!providersNode || !providersNode.parent) {
     throw new SchematicsException(`providers variable in ${path}`);
   }
- return new InsertChange(path, providersNode.getEnd()+3,'\n' + nodeContext)
+ return new InsertChange(path, providersNode.getEnd()+4,'\n' + nodeContext)
 }
 
 /*
@@ -100,14 +100,25 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
     let newNode=`${name}Red:${Name}Reducer,`;
     let newNodeContext=`${name}Red:${Name}Reducer,`;
     let parentNode=`appReducer`;
-     addNode(tree,path,newNode,parentNode,newNodeContext);
-
     let importNode=`import { ${Name}Reducer } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.reducer";`;
-    addImportToFile(tree,path,importNode);
+    if( addNode(tree,path,newNode,parentNode,newNodeContext))
+    {
+     addImportToFile(tree,path,importNode);
+    }
+
+    newNode=`${Name}Effets`;
+    newNodeContext=`${Name}Effets,`;
+    parentNode=`appEffects`;
+    if( addNode(tree,path,newNode,parentNode,newNodeContext))
+    {
+      importNode=`import { ${Name}Effets } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.effects";`;
+      addImportToFile(tree,path,importNode); 
+    }
+   
 
     path='/src/main.ts';
 
-    newNode=`{ provide: I${Name}Repository, useClass: ${Name}Repository },`;
+    newNode=`I${Name}Repository`;
     newNodeContext=`{ provide: I${Name}Repository, useClass: ${Name}Repository },`;
     parentNode=`providers`;
     if(addNode(tree,path,newNode,parentNode,newNodeContext))
@@ -125,7 +136,6 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
       importNode=`import { provideStore } from '@ngrx/store';`+'\n'+`import { appEffects, appReducer } from './app/Modules/Core/state/app.state';`;
       addImportToFile(tree,path,importNode);      
     }
-
 
     newNode=`provideEffects`;
     newNodeContext=`provideEffects(appEffects),`;
