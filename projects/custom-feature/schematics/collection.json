@@ -5,10 +5,10 @@
         "description": "Add my library to the project.",
         "factory": "./ng-add/index#ngAdd"
       },
-      "ui-component": {
-        "description": "This schematic generates custemised component",
-        "factory": "./ui-component/index#ComponentGenerator",
-        "schema": "./ui-component/schema.json",
+      "ui-feature": {
+        "description": "This schematic generates custemised ui feature",
+        "factory": "./ui-feature/index#ComponentGenerator",
+        "schema": "./ui-feature/schema.json",
         "aliases": [
           "suc"
         ]

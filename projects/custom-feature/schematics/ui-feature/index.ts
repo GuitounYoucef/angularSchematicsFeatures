@@ -1,6 +1,6 @@
 import { apply, applyTemplates, chain, mergeWith, move, Rule, url, Tree, SchematicContext, SchematicsException,  } from "@angular-devkit/schematics";
 import { strings, normalize } from "@angular-devkit/core";
-import { ComponentSchema } from "./ComponentSchema";
+import { UiFeatureSchema } from "./ComponentSchema";
 import {  getSourceNodes,  } from '@schematics/angular/utility/ast-utils';
 import {  InsertChange , Change,NoopChange} from '@schematics/angular/utility/change';
 import * as ts from 'typescript';
@@ -14,8 +14,8 @@ caommands:
 2- verdaccio
 3- npm adduser --registry http://localhost:4873/
 4- npm run build
-5- npm run build --prefix projects/simple-feature
-6-1 cd dist/simple-feature
+5- npm run build --prefix projects/custom-feature
+6-1 cd dist/custom-feature
 6-2 npm publish
 
 add library to your project
@@ -89,7 +89,7 @@ function addImportToFile(tree: Tree,path:string,importNode: string):void
   tree.commitUpdate(declarationRecorder);
 }
 
-export function ComponentGenerator(options: ComponentSchema): Rule {
+export function ComponentGenerator(options: UiFeatureSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.info('Adding library Module to the app...');
 
@@ -97,15 +97,20 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
     let Name=options.name;
     // update Store file
     let path='/src/app/Modules/Core/state/app.state.ts';
-    let newNode=`${name}Red:${Name}Reducer,`;
-    let newNodeContext=`${name}Red:${Name}Reducer,`;
+    let newNode=`${name}Reducer: ${Name}Reducer,`;
+    let newNodeContext=`${name}Reducer: ${Name}Reducer,`;
     let parentNode=`appReducer`;
-    let importNode=`import { ${Name}Reducer } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.reducer";`;
+    let importNode=`import { ${Name}Reducer, ${Name}State } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.reducer";`;
     if( addNode(tree,path,newNode,parentNode,newNodeContext))
     {
      addImportToFile(tree,path,importNode);
     }
 
+    newNode=`${name}State: ${Name}State,`;
+    newNodeContext=`${name}State: ${Name}State,`;
+    parentNode=`AppState`;
+    addNode(tree,path,newNode,parentNode,newNodeContext);
+      
     newNode=`${Name}Effets`;
     newNodeContext=`${Name}Effets,`;
     parentNode=`appEffects`;
@@ -114,8 +119,7 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
       importNode=`import { ${Name}Effets } from "src/app/Modules/${Name}/${Name}.Data/${Name}.State/${name}.effects";`;
       addImportToFile(tree,path,importNode); 
     }
-   
-
+  
     path='/src/main.ts';
 
     newNode=`I${Name}Repository`;
@@ -155,10 +159,18 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
       addImportToFile(tree,path,importNode);      
     } 
 
-    
+ /*    path='/src/app/app.routes.ts';
 
-
- 
+    newNode=`{ path: '${name}',`+'\n'+ 
+    `loadComponent: () => import('./Modules/${Name}/${Name}.Presentation/${name}-view/${name}.component').then(m => m.${Name}Component)`+'\n'+
+    `//canActivate: [${name}Guard]`+'\n'+ 
+    `},`;
+    newNodeContext=`{ path: ${name},`+'\n'+ 
+    `loadComponent: () => import('./Modules/${Name}/${Name}.Presentation/${name}-view/${name}.component').then(m => m.${Name}Component)`+'\n'+
+    `//canActivate: [${name}Guard]`+'\n'+ 
+    `},`+'\n';
+    parentNode=`Routes`;
+    addNode(tree,path,newNode,parentNode,newNodeContext); */
 
     const templateSource = apply(
       url('./files'), [

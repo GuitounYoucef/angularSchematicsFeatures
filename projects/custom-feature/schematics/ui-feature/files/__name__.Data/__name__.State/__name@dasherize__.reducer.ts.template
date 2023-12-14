@@ -1,15 +1,15 @@
 import { Action, createReducer, on} from "@ngrx/store";
 import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
-import { edit<%= name %>, get<%= name %>Success, get<%= name %>sListSuccess } from "./<%= dasherize(name) %>s.actions";
+import { update<%= name %>, get<%= name %>Success, get<%= name %>sListSuccess } from "./<%= dasherize(name) %>.actions";
 
-export interface <%= dasherize(name) %>State{
-    <%= dasherize(name) %>sList : <%= name %>[];
+export interface <%= name %>State{
+    <%= dasherize(name) %>List : <%= name %>[];
     <%= name %>Detail: <%= name %> | null;
 
 };
 
-export const initialState:<%= dasherize(name) %>State={
-    <%= dasherize(name) %>sList:[],
+export const initialState:<%= name %>State={
+    <%= dasherize(name) %>List:[],
     <%= name %>Detail:null
 };
 
@@ -19,7 +19,7 @@ export const <%= name %>Reducer = createReducer(
   on(get<%= name %>sListSuccess, (state, action) => {
     return {
       ...state,
-      <%= dasherize(name) %>sList:action.cards<%= name %>List
+      <%= dasherize(name) %>sList:action.<%= name %>List
 
     };
   }),
@@ -29,7 +29,7 @@ export const <%= name %>Reducer = createReducer(
       <%= name %>Detail:action.<%= dasherize(name) %>
     };
   }),
-  on(edit<%= name %>, (state, action) => {
+  on(update<%= name %>, (state, action) => {
     return {
       ...state,
       <%= name %>Detail:action.<%= dasherize(name) %>
@@ -37,6 +37,6 @@ export const <%= name %>Reducer = createReducer(
   }),     
 );
 
-export function reducer(state: <%= dasherize(name) %>State | undefined, action: Action) {
-    return <%= dasherize(name) %>Reducer(state, action);
+export function reducer(state: <%= name %>State | undefined, action: Action) {
+    return <%= name %>Reducer(state, action);
 }

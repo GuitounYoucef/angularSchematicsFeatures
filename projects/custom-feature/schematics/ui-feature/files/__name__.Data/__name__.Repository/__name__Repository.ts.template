@@ -1,21 +1,18 @@
 import { Injectable } from "@angular/core";
-import { I<%= dasherize(name) %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
 import { Observable, map, pluck } from "rxjs";
-
 import { HttpService } from "src/app/Modules/Core/API/HttpService";
-
 import { HttpRequestMethod } from "src/app/Modules/Core/API/HttpRequestMethod";
 import { SuccessApiResponse } from "src/app/Modules/Core/API/ApiResponse";
 import { environment } from "src/environements/environement";
-import { HttpClient } from "@angular/common/http";
+
+import { I<%= name %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
+import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
 
 @Injectable()
 export class <%= name %>Repository extends I<%= name %>Repository {
 
-
-
-    constructor(private httpService: HttpService,
-                private httpClient: HttpClient) {
+    constructor(private httpService: HttpService) 
+    {
         super();
     } 
 
@@ -31,7 +28,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         );
         return this.httpService.execute(options).pipe(
             map((item) => {
-            let res = item as SuccessApiResponse<<%= dasherize(name) %>[]>;
+            let res = item as SuccessApiResponse<<%= name %>[]>;
             return res.results;
           })
         );
@@ -52,7 +49,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         );
         return this.httpService.execute(options).pipe(
           map((item) => {
-            let res = item as SuccessApiResponse<<%= dasherize(name) %>>;
+            let res = item as SuccessApiResponse<<%= name %>>;
             return res.results;
           })
         );        
@@ -70,7 +67,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         );
         return this.httpService.execute(options).pipe(
           map((item) => {
-            let res = item as SuccessApiResponse<<%= dasherize(name) %>>;
+            let res = item as SuccessApiResponse<<%= name %>>;
             return res.results;
           })
         );
@@ -87,7 +84,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         return this.httpService.execute(options).pipe(
           pluck('results'),
           map((item) => {
-            let res = item as SuccessApiResponse<<%= dasherize(name) %>>;
+            let res = item as SuccessApiResponse<<%= name %>>;
             return res.results;
           })
         );  
@@ -105,7 +102,7 @@ export class <%= name %>Repository extends I<%= name %>Repository {
         return this.httpService.execute(options).pipe(
           pluck('results'),
           map((item) => {
-            let res = item as SuccessApiResponse<<%= dasherize(name) %>>;
+            let res = item as SuccessApiResponse<<%= name %>>;
             return res.results;
           })
         );

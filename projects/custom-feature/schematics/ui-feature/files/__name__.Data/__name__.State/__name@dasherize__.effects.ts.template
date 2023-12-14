@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { get<%= name %>, get<%= name %>Failed, get<%= name %>Success, get<%= name %>sList, get<%= name %>sListFailed, get<%= name %>sListSuccess, save<%= name %>, save<%= name %>Failed,
-     save<%= name %>Success, update<%= name %>, update<%= name %>Failed, update<%= name %>Success, delete<%= name %>, delete<%= name %>Failed, delete<%= name %>Success  } from "./<%= dasherize(name) %>s.actions";
+     save<%= name %>Success, update<%= name %>, update<%= name %>Failed, update<%= name %>Success, delete<%= name %>, delete<%= name %>Failed, delete<%= name %>Success  } from "./<%= dasherize(name) %>.actions";
 
 import { catchError, exhaustMap, map, pipe, tap, of } from "rxjs";
 import { I<%= name %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
@@ -21,7 +21,7 @@ export class <%= name %>Effets{
         return this.actions$.pipe(
             ofType(get<%= name %>sList),
             exhaustMap((action) => {
-                return this.<%= dasherize(name) %>Rpository.getCards<%= name %>List().pipe(
+                return this.<%= dasherize(name) %>Rpository.get<%= name %>sList().pipe(
                     map((<%= name %>List) => {
                         console.log("getCards<%= name %>List : ",<%= name %>List);
                         return get<%= name %>sListSuccess({ <%= name %>List });
