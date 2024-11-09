@@ -10,7 +10,15 @@
         "factory": "./ui-component/index#ComponentGenerator",
         "schema": "./ui-component/schema.json",
         "aliases": [
-          "suc"
+          "suc-ui"
+        ]
+      },
+      "core-feature": {
+        "description": "This schematic generates core feature",
+        "factory": "./core-feature/index#ComponentGenerator",
+        "schema": "./core-feature/schema.json",
+        "aliases": [
+          "suc-core"
         ]
       }
     }

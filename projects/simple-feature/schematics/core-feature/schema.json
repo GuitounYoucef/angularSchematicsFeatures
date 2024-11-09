@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$id": "core-feature",
+    "title": "core feature Schema",
+    "type": "object",
+    "properties": {
+      "path": {
+        "description": "Where should be created the file",
+        "type": "string",
+        "format": "path",
+        "x-prompt": "Where should be created the file?",
+        "default": "src/app/Modules"
+      }
+    },
+    "required": []
+  }
+
