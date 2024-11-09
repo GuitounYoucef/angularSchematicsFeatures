@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD:projects/simple-feature/package.json
   "name": "simple-feature",
   "version": "0.1.35",
+=======
+  "name": "custom-feature",
+  "version": "0.1.29",
+>>>>>>> 95c7e80d8d3fad0f7d679839a3315aaf83664b52:projects/custom-feature/package.json
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },
@@ -10,7 +15,12 @@
   "schematics": "./schematics/collection.json",
   "scripts": {
     "build": "tsc -p tsconfig.schematics.json",
+<<<<<<< HEAD:projects/simple-feature/package.json
     "postbuild": "copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/simple-feature/"
+=======
+    "postbuild": "copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/custom-feature/"
+
+>>>>>>> 95c7e80d8d3fad0f7d679839a3315aaf83664b52:projects/custom-feature/package.json
   },
   "peerDependencies": {
     "@angular/common": "^16.1.0",

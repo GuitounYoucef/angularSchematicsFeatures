@@ -1,0 +1,48 @@
+import { createAction, props } from "@ngrx/store";
+import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
+
+
+export const GET_<%= uppercase(name) %>S_LIST = "[<%= dasherize(name) %>s list] get <%= name %>s List"
+export const GET_<%= uppercase(name) %>S_LIST_SUCCESS = "[<%= dasherize(name) %>s list] get <%= name %>s List success"
+export const GET_<%= uppercase(name) %>S_LIST_FAILED = "[<%= dasherize(name) %>s list] get <%= name %>s List failed"
+
+export const get<%= name %>sList = createAction(GET_<%= uppercase(name) %>S_LIST);
+export const get<%= name %>sListSuccess = createAction(GET_<%= uppercase(name) %>S_LIST_SUCCESS, props<{ <%= name %>List: <%= name %>[] }>());
+export const get<%= name %>sListFailed = createAction(GET_<%= uppercase(name) %>S_LIST_FAILED);
+/*---------------------------------------------------------------------------------------------------------------*/
+
+export const GET_<%= uppercase(name) %> = "[<%= dasherize(name) %>] get <%= name %> by id"
+export const GET_<%= uppercase(name) %>_SUCCESS = "[<%= dasherize(name) %>s] get <%= name %>s by id success"
+export const GET_<%= uppercase(name) %>_FAILED = "[<%= dasherize(name) %>] get <%= name %>s by id failed"
+
+export const get<%= name %> = createAction(GET_<%= uppercase(name) %>, props<{ id:number }>());
+export const get<%= name %>Success = createAction(GET_<%= uppercase(name) %>_SUCCESS, props<{ <%= dasherize(name) %>: <%= name %> }>());
+export const get<%= name %>Failed = createAction(GET_<%= uppercase(name) %>_FAILED);
+/*---------------------------------------------------------------------------------------------------------------*/
+
+export const SAVE_<%= uppercase(name) %> = "[<%= dasherize(name) %>] save <%= name %>"
+export const SAVE_<%= uppercase(name) %>_SUCCESS = "[<%= dasherize(name) %>s] save <%= name %> success"
+export const SAVE_<%= uppercase(name) %>_FAILED = "[<%= dasherize(name) %>s] save <%= name %> failed"
+
+export const save<%= name %> = createAction(SAVE_<%= uppercase(name) %>, props<{ <%= dasherize(name) %>: <%= name %> }>());
+export const save<%= name %>Success = createAction(SAVE_<%= uppercase(name) %>_SUCCESS, props<{ message: string }>());
+export const save<%= name %>Failed = createAction(SAVE_<%= uppercase(name) %>_FAILED);
+/*---------------------------------------------------------------------------------------------------------------*/
+
+export const UPDATE_<%= uppercase(name) %> = "[<%= dasherize(name) %>] update <%= name %>"
+export const UPDATE_<%= uppercase(name) %>_SUCCESS = "[<%= dasherize(name) %>s] update <%= name %> success"
+export const UPDATE_<%= uppercase(name) %>_FAILED = "[<%= dasherize(name) %>s] update <%= name %> failed"
+
+export const update<%= name %> = createAction(UPDATE_<%= uppercase(name) %>, props<{ <%= dasherize(name) %>: <%= name %> }>());
+export const update<%= name %>Success = createAction(UPDATE_<%= uppercase(name) %>_SUCCESS, props<{ message: string }>());
+export const update<%= name %>Failed = createAction(UPDATE_<%= uppercase(name) %>_FAILED);
+/*---------------------------------------------------------------------------------------------------------------*/
+
+export const DELETE_<%= uppercase(name) %> = "[<%= dasherize(name) %>] delete <%= name %>"
+export const DELETE_<%= uppercase(name) %>_SUCCESS = "[<%= dasherize(name) %>s] delete <%= name %> success"
+export const DELETE_<%= uppercase(name) %>_FAILED = "[<%= dasherize(name) %>s] delete <%= name %> failed"
+
+export const delete<%= name %> = createAction(DELETE_<%= uppercase(name) %>, props<{ <%= dasherize(name) %>: <%= name %> }>());
+export const delete<%= name %>Success = createAction(DELETE_<%= uppercase(name) %>_SUCCESS, props<{ message: string }>());
+export const delete<%= name %>Failed = createAction(DELETE_<%= uppercase(name) %>_FAILED);
+/*---------------------------------------------------------------------------------------------------------------*/

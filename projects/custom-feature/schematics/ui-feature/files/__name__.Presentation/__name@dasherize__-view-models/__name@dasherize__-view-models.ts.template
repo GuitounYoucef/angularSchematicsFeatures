@@ -1,0 +1,42 @@
+import { Injectable } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { <%= dasherize(name) %>State } from "../../<%= name %>.Data/<%= name %>.State/<%= dasherize(name) %>.reducer";
+import { selectEditing<%= name %>, select<%= name %>List } from "../../<%= name %>.Data/<%= name %>.State/<%= dasherize(name) %>.selectors";
+import { <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
+import { get<%= name %>, get<%= name %>sList, save<%= name %>, update<%= name %> } from "../../<%= name %>.Data/<%= name %>.State/<%= dasherize(name) %>.actions";
+
+@Injectable({providedIn:"root"})
+export class <%= name %>ViewModel {
+
+    readonly <%= dasherize(name) %>List$ = this.store.select(select<%= name %>List);
+    readonly editing<%= name %>$ = this.store.select(selectEditing<%= name %>);
+
+    constructor(
+        private store: Store<<%= dasherize(name) %>State>,
+    ) { }
+
+
+
+    get<%= name %>ById(id: number) {
+        this.store.dispatch(get<%= name %>({ id: id }))
+    }
+
+
+    get<%= name %>List() {
+        this.store.dispatch(get<%= name %>sList());
+    }
+
+    save<%= name %>(<%= dasherize(name) %>: <%= name %>) {
+        this.store.dispatch(save<%= name %>({ <%= dasherize(name) %>: <%= dasherize(name) %> }));
+    }
+
+
+    update<%= name %>(<%= dasherize(name) %>: <%= name %>) {
+        this.store.dispatch(update<%= name %>({ <%= dasherize(name) %>: <%= dasherize(name) %> }));
+
+    }
+
+
+
+
+}  
