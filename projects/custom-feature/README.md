@@ -4,7 +4,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Code scaffolding
 
-Run `ng generate component component-name --project simple-feature` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project simple-feature`.
+Run `ng generate component component-name --project custom-feature` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project simple-feature`.
 > Note: Don't forget to add `--project simple-feature` or else it will be added to the default project in your `angular.json` file. 
 
 ## Build

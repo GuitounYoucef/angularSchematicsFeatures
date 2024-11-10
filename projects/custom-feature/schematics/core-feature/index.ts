@@ -5,6 +5,89 @@ import {  getSourceNodes,  } from '@schematics/angular/utility/ast-utils';
 import {  InsertChange , Change,NoopChange} from '@schematics/angular/utility/change';
 import * as ts from 'typescript';
 
+import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
+
+import { NodePackageInstallTask, RunSchematicTask  } from '@angular-devkit/schematics/tasks';
+//import { addImportToModule } from '@schematics/angular/utility/ast-utils';
+
+
+function addAngularMaterialToPackageJson(): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    const angularMaterialDependency: NodeDependency = {
+      type: NodeDependencyType.Default,
+      name: '@angular/material',
+      version: '^15.0.0', // Specify the version you need here
+      overwrite: true,
+    };
+
+    addPackageJsonDependency(host, angularMaterialDependency);
+
+    // Schedule the normal `npm install` first
+    const installTaskId = context.addTask(new NodePackageInstallTask());
+
+    // Schedule `npm install --force` to run after the initial install
+    context.addTask(
+      new RunSchematicTask('force-install', {}),
+      [installTaskId]
+    );
+
+    return host;
+  };
+}
+
+/* function configureAngularMaterial(): Rule {
+  return (host: Tree, context: SchematicContext) => {
+    const workspaceConfig = host.read('angular.json');
+    if (!workspaceConfig) {
+      context.logger.error('Could not find Angular workspace configuration');
+      return host;
+    }
+
+    const workspace = JSON.parse(workspaceConfig.toString());
+    const defaultProjectName = workspace.defaultProject;
+    if (!defaultProjectName) {
+      context.logger.error('No default project found in Angular workspace configuration');
+      return host;
+    }
+
+    const projectConfig = workspace.projects[defaultProjectName];
+    if (!projectConfig || !projectConfig.architect || !projectConfig.architect.build || !projectConfig.architect.build.options) {
+      context.logger.error(`Could not find build options for project ${defaultProjectName}`);
+      return host;
+    }
+
+    // Add the Angular Material theme to the styles array in build options
+    const buildOptions = projectConfig.architect.build.options;
+    buildOptions.styles.push('node_modules/@angular/material/prebuilt-themes/indigo-pink.css');
+    host.overwrite('angular.json', JSON.stringify(workspace, null, 2));
+
+    // Import Material module into the app module
+    const modulePath = 'src/app/app.module.ts';
+    const moduleSource = ts.createSourceFile(
+      modulePath,
+      host.read(modulePath)!.toString(),
+      ts.ScriptTarget.Latest,
+      true
+    );
+
+    const changes = addImportToModule(
+      moduleSource,
+      modulePath,
+      'MatButtonModule',
+      '@angular/material/button'
+    );
+
+    const recorder = host.beginUpdate(modulePath);
+    changes.forEach(change => {
+      if (change instanceof InsertChange) {
+        recorder.insertLeft(change.pos, change.toAdd);
+      }
+    });
+    host.commitUpdate(recorder);
+
+    return host;
+  };
+} */
 
 
 /*
@@ -14,13 +97,13 @@ caommands:
 2- verdaccio
 3- npm adduser --registry http://localhost:4873/
 4- npm run build
-5- npm run build --prefix projects/simple-feature
-6-1 cd dist/simple-feature
+5- npm run build --prefix projects/custom-feature
+6-1 cd dist/custom-feature
 6-2 npm publish
 
 add library to your project
-1- npm add simple-feature
-2- ng g simple-feature:ui-component --name FeatureName
+1- npm add custom-feature
+2- ng g custom-feature:ui-component --name FeatureName
 
 
  */
@@ -89,6 +172,8 @@ function addNode(tree: Tree,path:string,newNode: string,parentNode:string,nodeCo
   tree.commitUpdate(declarationRecorder);
 }
 
+
+
 export function ComponentGenerator(options: ComponentSchema): Rule {
   return (tree: Tree, context: SchematicContext) => {
     context.logger.info('Adding library Module to the app...');
@@ -151,6 +236,8 @@ export function ComponentGenerator(options: ComponentSchema): Rule {
     return chain([
       //  externalSchematic('@schematics/angular', 'component', options),
       mergeWith(templateSource),
+      addAngularMaterialToPackageJson(),
+  //    configureAngularMaterial()
 
     ])
   }

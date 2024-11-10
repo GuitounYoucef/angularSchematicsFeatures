@@ -3,23 +3,23 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "simple-feature": {
+    "custom-feature": {
       "projectType": "library",
-      "root": "projects/simple-feature",
-      "sourceRoot": "projects/simple-feature/src",
+      "root": "projects/custom-feature",
+      "sourceRoot": "projects/custom-feature/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/simple-feature/ng-package.json"
+            "project": "projects/custom-feature/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/simple-feature/tsconfig.lib.prod.json"
+              "tsConfig": "projects/custom-feature/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/simple-feature/tsconfig.lib.json"
+              "tsConfig": "projects/custom-feature/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -27,7 +27,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/simple-feature/tsconfig.spec.json",
+            "tsConfig": "projects/custom-feature/tsconfig.spec.json",
             "polyfills": [
               "zone.js",
               "zone.js/testing"

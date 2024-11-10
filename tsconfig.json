@@ -17,8 +17,8 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "paths": {
-      "simple-feature": [
-        "dist/simple-feature"
+      "custom-feature": [
+        "dist/custom-feature"
       ]
     },
     "target": "ES2022",

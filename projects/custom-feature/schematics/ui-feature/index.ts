@@ -19,8 +19,8 @@ caommands:
 6-2 npm publish
 
 add library to your project
-1- npm add simple-feature
-2- ng g simple-feature:ui-component --name FeatureName
+1- npm add custom-feature
+2- ng g custom-feature:ui-component --name FeatureName
 
 
  */

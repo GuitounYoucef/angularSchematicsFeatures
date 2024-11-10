@@ -15,7 +15,7 @@
       "noUnusedParameters": true,
       "noUnusedLocals": true,
       "rootDir": "schematics",
-      "outDir": "../../dist/simple-feature/schematics",
+      "outDir": "../../dist/custom-feature/schematics",
       "skipDefaultLibCheck": true,
       "skipLibCheck": true,
       "sourceMap": true,
