@@ -1,6 +1,6 @@
 {
   "name": "custom-feature",
-  "version": "0.1.41",
+  "version": "0.1.58",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },

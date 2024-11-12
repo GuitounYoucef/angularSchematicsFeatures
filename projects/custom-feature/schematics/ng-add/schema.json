@@ -1,0 +1,19 @@
+  {
+    "$schema": "http://json-schema.org/schema",
+    "$id": "ngAdd",
+    "title": "NGRX Setup",
+    "type": "object",
+    "properties": {
+      "minimal": {
+        "type": "boolean",
+        "description": "Minimal setup without example files",
+        "default": false
+      },
+      "project": {
+        "type": "string",
+        "description": "The project name to set up NGRX in."
+      }
+    }
+  }
+  
+

@@ -16,7 +16,7 @@ function addAngularMaterialToPackageJson(): Rule {
     const angularMaterialDependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: '@angular/material',
-      version: '^15.0.0', // Specify the version you need here
+      version: '^18.2.0', // Specify the version you need here
       overwrite: true,
     };
 
@@ -24,6 +24,7 @@ function addAngularMaterialToPackageJson(): Rule {
 
     // Schedule the normal `npm install` first
     const installTaskId = context.addTask(new NodePackageInstallTask());
+    context.addTask(new NodePackageInstallTask());
 
     // Schedule `npm install --force` to run after the initial install
     context.addTask(
