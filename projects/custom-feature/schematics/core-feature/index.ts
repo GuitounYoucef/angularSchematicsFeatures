@@ -35,6 +35,8 @@ function addAngularMaterialToPackageJson(): Rule {
   };
 }
 
+
+
 /* function configureAngularMaterial(): Rule {
   return (host: Tree, context: SchematicContext) => {
     const workspaceConfig = host.read('angular.json');
