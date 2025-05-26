@@ -3,7 +3,8 @@ import { strings, normalize } from "@angular-devkit/core";
 import { ComponentSchema } from "./ComponentSchema";
 import {  getSourceNodes,  } from '@schematics/angular/utility/ast-utils';
 import {  InsertChange , Change,NoopChange} from '@schematics/angular/utility/change';
-import * as ts from 'typescript';
+import * as ts from '@schematics/angular/third_party/github.com/Microsoft/TypeScript/lib/typescript';
+
 
 import { addPackageJsonDependency, NodeDependency, NodeDependencyType } from '@schematics/angular/utility/dependencies';
 
