@@ -12,18 +12,17 @@ import { NavBarComponent } from './Components/nav-bar/nav-bar.component';
 import { HeaderComponent } from './Components/header/header.component';
 
 @Component({
-  selector: 'app-Main',
-  templateUrl: './Main.component.html',
-  styleUrls: ['./Main.component.css'],
-  standalone:true,
-  imports:[CommonModule,
-           MatSidenavModule,
-           NavBarComponent,
-           HeaderComponent,
-           RouterOutlet,
-           MatListModule,
-           MatIconModule,
-           AddPostComponent]
+    selector: 'app-Main',
+    templateUrl: './Main.component.html',
+    styleUrls: ['./Main.component.css'],
+    imports: [CommonModule,
+        MatSidenavModule,
+        NavBarComponent,
+        HeaderComponent,
+        RouterOutlet,
+        MatListModule,
+        MatIconModule,
+        AddPostComponent]
 })
 export class MainComponent implements OnInit {
 

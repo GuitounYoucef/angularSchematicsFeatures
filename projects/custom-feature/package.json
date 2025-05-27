@@ -1,6 +1,6 @@
 {
   "name": "custom-feature",
-  "version": "0.1.61",
+  "version": "0.1.64",
   "publishConfig": {
     "registry": "http://localhost:4873/"
   },
@@ -13,8 +13,10 @@
     "postbuild": "copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/custom-feature/"
   },
   "peerDependencies": {
-    "@angular/common": "^18.2.11",
-    "@angular/core": "^18.2.11"
+    "@angular-devkit/build-angular": "^19.2.13",
+    "@angular-devkit/core": "^19.2.13",
+    "@angular/common": "^19.2.13",
+    "@angular/core": "^19.2.13"
   },
   "dependencies": {
     "custom-feature": "file:",

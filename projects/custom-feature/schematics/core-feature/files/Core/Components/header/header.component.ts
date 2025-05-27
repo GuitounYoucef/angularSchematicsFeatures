@@ -9,13 +9,10 @@ import {MatDividerModule} from '@angular/material/divider';
 
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
-  standalone: true,
-  imports: [MatToolbarModule,MatIconModule,MatMenuModule,MatDividerModule],
-
-
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    imports: [MatToolbarModule, MatIconModule, MatMenuModule, MatDividerModule]
 })
 export class HeaderComponent implements OnInit {
 

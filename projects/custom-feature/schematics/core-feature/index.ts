@@ -17,7 +17,7 @@ function addAngularMaterialToPackageJson(): Rule {
     const angularMaterialDependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: '@angular/material',
-      version: '^18.2.0', // Specify the version you need here
+      version: '^19.2.13', // Specify the version you need here
       overwrite: true,
     };
 

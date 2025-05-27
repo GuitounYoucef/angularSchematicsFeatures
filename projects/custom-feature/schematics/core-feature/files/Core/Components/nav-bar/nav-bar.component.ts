@@ -24,25 +24,24 @@ import { PasswordUpdateComponent } from 'src/app/Modules/Auth/Auth.Presentation/
 import { MemberDialogComponent } from 'src/app/Modules/Team/Team.Presentation/member-dialog/member-dialog.component';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: './nav-bar.component.html',
-  styleUrls: ['./nav-bar.component.css'],
-  standalone: true,
-  imports: [NgIf,
-            MatToolbarModule,
-            AvatarModule,
-            MatListModule,
-            MatDividerModule,
-            MatIconModule,
-            MatMenuModule,
-            MatDividerModule,
-            MatListModule,
-            RouterLink,
-            RouterLinkActive,
-            MatBadgeModule,
-            FormsModule,
-            CommonModule,
-            MatDialogModule]
+    selector: 'app-nav-bar',
+    templateUrl: './nav-bar.component.html',
+    styleUrls: ['./nav-bar.component.css'],
+    imports: [NgIf,
+        MatToolbarModule,
+        AvatarModule,
+        MatListModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        MatDividerModule,
+        MatListModule,
+        RouterLink,
+        RouterLinkActive,
+        MatBadgeModule,
+        FormsModule,
+        CommonModule,
+        MatDialogModule]
 })
 export class NavBarComponent implements OnInit, OnDestroy {
 

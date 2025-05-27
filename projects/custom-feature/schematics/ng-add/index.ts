@@ -29,7 +29,7 @@ function addAngularNGRXToPackageJson(): Rule {
     let angularMaterialDependency: NodeDependency = {
       type: NodeDependencyType.Default,
       name: "@ngrx/store",
-      version: '^18.1.1', // Specify the version you need here
+      version: '^19.2.13', // Specify the version you need here
       overwrite: true,
     };
     addPackageJsonDependency(host, angularMaterialDependency);
