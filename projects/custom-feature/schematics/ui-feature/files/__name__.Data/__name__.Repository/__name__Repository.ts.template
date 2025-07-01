@@ -1,0 +1,112 @@
+import { Injectable } from "@angular/core";
+import { Observable, map, pluck } from "rxjs";
+import { HttpService } from "src/app/Modules/Core/API/HttpService";
+import { HttpRequestMethod } from "src/app/Modules/Core/API/HttpRequestMethod";
+import { SuccessApiResponse } from "src/app/Modules/Core/API/ApiResponse";
+import { environment } from "src/environements/environement";
+
+import { I<%= name %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
+import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
+
+@Injectable()
+export class <%= name %>Repository extends I<%= name %>Repository {
+
+    constructor(private httpService: HttpService) 
+    {
+        super();
+    } 
+
+    get<%= name %>sList(): Observable<<%= name %>[]>
+    {
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s`;
+        const options = this.httpService.createOptions(
+          HttpRequestMethod.get,
+   //       this.httpService.createHeader(),
+          requestURL,
+          null,
+          false
+        );
+        return this.httpService.execute(options).pipe(
+            map((item) => {
+            let res = item as SuccessApiResponse<<%= name %>[]>;
+            return res.results;
+          })
+        );
+    }
+
+ 
+  
+    create<%= name %>(<%= dasherize(name) %>:<%= name %>): Observable<object>{
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s`;
+        //return this.httpClient.<%= dasherize(name) %><any>(requestURL, <%= dasherize(name) %>);
+         console.log("Repository : <%= dasherize(name) %> requestURL ",requestURL)
+        const options = this.httpService.createOptions(
+          HttpRequestMethod.post,
+      //    this.httpService.createHeader(),
+          requestURL,
+          <%= dasherize(name) %>,
+          false
+        );
+        return this.httpService.execute(options).pipe(
+          map((item) => {
+            let res = item as SuccessApiResponse<<%= name %>>;
+            return res.results;
+          })
+        );        
+      
+    }
+  
+    get<%= name %>ById(id:number): Observable<<%= name %>>{
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s/${id}`;
+        const options = this.httpService.createOptions(
+          HttpRequestMethod.get,
+  //        this.httpService.createHeader(),
+          requestURL,
+          null,
+          false
+        );
+        return this.httpService.execute(options).pipe(
+          map((item) => {
+            let res = item as SuccessApiResponse<<%= name %>>;
+            return res.results;
+          })
+        );
+    }
+    Update<%= name %>(<%= dasherize(name) %>:<%= name %>): Observable<object>{
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s`;
+        const options = this.httpService.createOptions(
+          HttpRequestMethod.put,
+  //        this.httpService.createHeader(),
+          requestURL,
+          <%= dasherize(name) %>,
+          false
+        );
+        return this.httpService.execute(options).pipe(
+          pluck('results'),
+          map((item) => {
+            let res = item as SuccessApiResponse<<%= name %>>;
+            return res.results;
+          })
+        );  
+    }    
+  
+    delete<%= dasherize(name) %>(<%= name %>ID:number): Observable<any>{
+        const requestURL = `${environment.apiURL}/<%= dasherize(name) %>s/${<%= name %>ID}`;
+        const options = this.httpService.createOptions(
+          HttpRequestMethod.delete,
+   //       this.httpService.createHeader(),
+          requestURL,
+          null,
+          false
+        );
+        return this.httpService.execute(options).pipe(
+          pluck('results'),
+          map((item) => {
+            let res = item as SuccessApiResponse<<%= name %>>;
+            return res.results;
+          })
+        );
+    } 
+
+
+}

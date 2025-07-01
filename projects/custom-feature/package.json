@@ -1,0 +1,25 @@
+{
+  "name": "custom-feature",
+  "version": "0.1.64",
+  "publishConfig": {
+    "registry": "http://localhost:4873/"
+  },
+  "ng-add": {
+    "save": "true"
+  },
+  "schematics": "./schematics/collection.json",
+  "scripts": {
+    "build": "tsc -p tsconfig.schematics.json",
+    "postbuild": "copyfiles schematics/collection.json schematics/*/schema.json schematics/*/files/** ../../dist/custom-feature/"
+  },
+  "peerDependencies": {
+    "@angular-devkit/build-angular": "^19.2.13",
+    "@angular-devkit/core": "^19.2.13",
+    "@angular/common": "^19.2.13",
+    "@angular/core": "^19.2.13"
+  },
+  "dependencies": {
+    "custom-feature": "file:",
+    "tslib": "^2.3.0"
+  }
+}

@@ -1,0 +1,11 @@
+
+<mat-sidenav-container>
+  <mat-sidenav [opened]="sideBarOpen" mode="side" autoFocus="false">
+    <app-nav-bar></app-nav-bar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="w-full h-full m-0 bg-slate-200 ">
+    <router-outlet></router-outlet>
+  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

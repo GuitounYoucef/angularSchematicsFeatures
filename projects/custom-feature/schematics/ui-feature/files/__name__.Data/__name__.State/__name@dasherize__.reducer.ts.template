@@ -1,0 +1,42 @@
+import { Action, createReducer, on} from "@ngrx/store";
+import {  <%= name %> } from "../../<%= name %>.Domain/<%= name %>.Models/<%= name %>";
+import { update<%= name %>, get<%= name %>Success, get<%= name %>sListSuccess } from "./<%= dasherize(name) %>.actions";
+
+export interface <%= name %>State{
+    <%= dasherize(name) %>List : <%= name %>[];
+    <%= name %>Detail: <%= name %> | null;
+
+};
+
+export const initialState:<%= name %>State={
+    <%= dasherize(name) %>List:[],
+    <%= name %>Detail:null
+};
+
+/*************************************************************************************************/
+export const <%= name %>Reducer = createReducer(
+    initialState,
+  on(get<%= name %>sListSuccess, (state, action) => {
+    return {
+      ...state,
+      <%= dasherize(name) %>sList:action.<%= name %>List
+
+    };
+  }),
+  on(get<%= name %>Success, (state, action) => {
+    return {
+      ...state,
+      <%= name %>Detail:action.<%= dasherize(name) %>
+    };
+  }),
+  on(update<%= name %>, (state, action) => {
+    return {
+      ...state,
+      <%= name %>Detail:action.<%= dasherize(name) %>
+    };
+  }),     
+);
+
+export function reducer(state: <%= name %>State | undefined, action: Action) {
+    return <%= name %>Reducer(state, action);
+}

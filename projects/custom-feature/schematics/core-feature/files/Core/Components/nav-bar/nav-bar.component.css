@@ -1,0 +1,52 @@
+
+mat-icon{
+    
+    margin: 0px 15px 0px 0px;
+}
+
+.app-icon{
+    width: 80px;
+    height: 80px;
+    margin-left: 20px;
+    margin: auto;
+}
+
+.txt-30{
+    font-size: 30px;   
+}
+.txt-40{
+    font-size: 80px;   
+}
+.list-item{
+    color: white;
+    display: flex;
+    padding: 8px;
+    padding-top: 12px;
+    padding-left: 20px;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 5px;
+    font-family: "arial", sans-serif;
+} 
+.list-item:hover,
+.list-item:hover *
+{
+    cursor: pointer;
+    background-color: white;
+    color: rgb(24, 26, 26);
+  }
+
+  mat-list-item.active,
+  mat-list-item.active *
+  {
+    background-color: rgb(190, 209, 224);
+    color: rgb(24, 26, 26);
+  }
+
+ mat-divider {
+    border-top-color: white;
+    border-top-width: 1px;
+    width: 86%;
+    margin: 10px auto 10px auto;
+    margin-bottom: 10px;
+}

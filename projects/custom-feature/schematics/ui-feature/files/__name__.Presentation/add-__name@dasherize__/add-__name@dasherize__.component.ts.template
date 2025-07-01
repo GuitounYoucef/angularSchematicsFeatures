@@ -1,0 +1,29 @@
+
+import { Component,  OnInit,  } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { <%= name %>ViewModel } from '../<%= dasherize(name) %>-view-models/<%= dasherize(name) %>-view-models';
+
+@Component({
+  selector: 'app-add-<%= dasherize(name) %>',
+  templateUrl: './add-<%= dasherize(name) %>.component.html',
+  styleUrls: ['./add-<%= dasherize(name) %>.component.css'],
+  standalone: true,
+  imports: [FormsModule,
+            ReactiveFormsModule,
+           ],
+    
+})
+
+export class Add<%= name %>Component implements OnInit {
+
+  <%= dasherize(name) %>List$=this.<%= dasherize(name) %>sViewModel.<%= dasherize(name) %>List$;
+
+  constructor(private <%= dasherize(name) %>sViewModel: <%= name %>ViewModel,
+               ) { }
+
+  ngOnInit() {
+     
+  }
+
+
+}

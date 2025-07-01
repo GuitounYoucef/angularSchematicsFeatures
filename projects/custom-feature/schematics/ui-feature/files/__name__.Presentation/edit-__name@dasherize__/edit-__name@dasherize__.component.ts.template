@@ -1,0 +1,34 @@
+
+import { Component,  OnInit,} from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { <%= name %>ViewModel } from '../<%= dasherize(name) %>-view-models/<%= dasherize(name) %>-view-models';
+
+@Component({
+  selector: 'app-edit-<%= dasherize(name) %>',
+  templateUrl: './edit-<%= dasherize(name) %>.component.html',
+  styleUrls: ['./edit-<%= dasherize(name) %>.component.css'],
+  standalone: true,
+  imports: [FormsModule,
+            ReactiveFormsModule,
+           ],
+})
+export class Edit<%= name %>Component implements OnInit {
+
+  id!:number;
+
+  constructor(
+              private <%= dasherize(name) %>ViewModel:<%= name %>ViewModel,
+              private activaterouter:ActivatedRoute
+               ) {
+               }
+
+  ngOnInit() {
+     this.id=this.activaterouter.snapshot.params['id'] ;
+     this.<%= dasherize(name) %>ViewModel.get<%= name %>ById(this.id);
+  }
+
+
+   
+  
+}

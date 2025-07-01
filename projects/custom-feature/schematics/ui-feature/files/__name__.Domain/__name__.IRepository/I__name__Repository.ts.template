@@ -1,0 +1,16 @@
+
+import { Observable} from "rxjs";
+import {  <%= name %> } from "../<%= name %>.Models/<%= name %>";
+
+export abstract class I<%= name %>Repository {
+
+    abstract get<%= name %>sList(): Observable<<%= name %>[]>
+ 
+    abstract create<%= name %>(<%= dasherize(name) %>:<%= name %>): Observable<object>
+  
+    abstract get<%= name %>ById(id:number): Observable<<%= name %>>
+
+    abstract Update<%= name %>(<%= dasherize(name) %>:<%= name %>): Observable<object>
+  
+    abstract delete<%= dasherize(name) %>(<%= name %>ID:number): Observable<any>
+}

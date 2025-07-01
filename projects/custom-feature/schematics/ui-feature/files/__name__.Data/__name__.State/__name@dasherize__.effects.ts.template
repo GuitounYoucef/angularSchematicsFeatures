@@ -1,0 +1,89 @@
+import { Injectable } from "@angular/core";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
+import { get<%= name %>, get<%= name %>Failed, get<%= name %>Success, get<%= name %>sList, get<%= name %>sListFailed, get<%= name %>sListSuccess, save<%= name %>, save<%= name %>Failed,
+     save<%= name %>Success, update<%= name %>, update<%= name %>Failed, update<%= name %>Success, delete<%= name %>, delete<%= name %>Failed, delete<%= name %>Success  } from "./<%= dasherize(name) %>.actions";
+
+import { catchError, exhaustMap, map, pipe, tap, of } from "rxjs";
+import { I<%= name %>Repository } from "../../<%= name %>.Domain/<%= name %>.IRepository/I<%= name %>Repository";
+import { Router } from "@angular/router";
+
+
+@Injectable()
+export class <%= name %>Effets{
+    constructor(
+                 private actions$: Actions,
+                 private <%= dasherize(name) %>Rpository:I<%= name %>Repository,
+                 ){
+
+    }
+
+    load<%= name %>sList$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(get<%= name %>sList),
+            exhaustMap((action) => {
+                return this.<%= dasherize(name) %>Rpository.get<%= name %>sList().pipe(
+                    map((<%= name %>List) => {
+                        console.log("getCards<%= name %>List : ",<%= name %>List);
+                        return get<%= name %>sListSuccess({ <%= name %>List });
+                    }),
+                    catchError(err => { return of(get<%= name %>sListFailed()) }),  
+                 
+                )
+            })
+        )
+    });
+
+
+    load<%= name %>ById$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(get<%= name %>),
+            exhaustMap((action) => {
+                return this.<%= dasherize(name) %>Rpository.get<%= name %>ById(action.id).pipe(
+                    map((<%= dasherize(name) %>) => {
+                        console.log("get<%= name %>ById : ",<%= dasherize(name) %>);
+                        return get<%= name %>Success({ <%= dasherize(name) %> });
+                    }),
+                    catchError(err => { return of(get<%= name %>Failed()) }),  
+                 
+                )
+            })
+        )
+    });    
+
+    save<%= name %>$ = createEffect(() => {
+        return this.actions$.pipe(       
+            ofType(save<%= name %>),
+            exhaustMap((action) => {
+                return this.<%= dasherize(name) %>Rpository.create<%= name %>(action.<%= dasherize(name) %>).pipe(
+                    map((respense) => {
+                        let message="save <%= name %> Success"
+                        return save<%= name %>Success({message});
+                    })
+                    ,
+                    catchError(err => { return of(save<%= name %>Failed()) }),  
+                )
+            })
+        )
+    });    
+
+
+    update<%= name %>$ = createEffect(() => {
+        return this.actions$.pipe(       
+            ofType(update<%= name %>), 
+            exhaustMap((action) => {
+                return this.<%= dasherize(name) %>Rpository.Update<%= name %>(action.<%= dasherize(name) %>).pipe(
+                    map((respense) => {
+                        let message="update <%= name %> Success"
+                        return update<%= name %>Success({message});
+                    })
+                    ,
+                    catchError(err => { return of(update<%= name %>Failed()) }),  
+                )
+            })
+        )
+    });   
+    
+    
+
+
+}

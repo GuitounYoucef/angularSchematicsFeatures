@@ -1,0 +1,72 @@
+<mat-list>
+
+    <div class="flex px-4 items-center">
+      <span class="text-xl mx-auto font-black p-4">APC Sidi Khaled</span>
+      <!-- <mat-icon class="txt-40 app-icon">view_compact</mat-icon>  -->   
+    </div>
+
+    <div class="flex flex-col items-center p-4 gap-2">
+      <ngx-avatars [name]="(curentUser$ | async)!.username" size="90"></ngx-avatars>
+      <p class="text-xl">{{(curentUser$ | async)!.username}}</p>
+    </div>
+    <mat-divider></mat-divider>
+
+  <div class="list-item" routerLink="posts" [routerLinkActive]="['active']">
+    <mat-icon mat-list-icon>create</mat-icon>
+    <span>Posts</span>
+  </div>
+
+  <div class="list-item" routerLink="posts/deleted">
+    <mat-icon mat-list-icon>delete</mat-icon>
+    <span>Deleted Posts</span>
+  </div>  
+
+  <div class="list-item" routerLink="messages" [routerLinkActive]="['active']">
+    <mat-icon *ngIf="(UnreadedMessagesNumber$ | async)! >0" mat-list-icon  [matBadge]="UnreadedMessagesNumber$ | async" matBadgeColor="warn">message</mat-icon>
+    <mat-icon *ngIf="(UnreadedMessagesNumber$ | async)! ==0">message</mat-icon>
+    <span>Messages</span>
+  </div>
+
+  <div class="list-item" routerLink="notifications" [routerLinkActive]="['active']">
+    <mat-icon mat-list-icon>notifications</mat-icon>
+    <span>Notifications</span>
+  </div>
+
+  <div class="list-item" routerLink="team" [routerLinkActive]="['active']">
+    <mat-icon mat-list-icon>group</mat-icon>
+    <span>Company Team</span>
+  </div>
+
+  <div *ngIf="(curentUser$ | async)!.role==='ROLE_ADMIN'" class="list-item" routerLink="settings" [routerLinkActive]="['active']">
+    <mat-icon mat-list-icon>settings</mat-icon>
+    <span>Setting</span>
+  </div>
+
+  <div class="list-item" routerLink="statistics" [routerLinkActive]="['active']">
+ 
+      <mat-icon mat-list-icon>insert_chart</mat-icon>
+      <span>Statistics</span>
+   
+  </div>
+
+  <div *ngIf="(curentUser$ | async)!.role==='ROLE_ADMIN'" class="list-item" routerLink="users" [routerLinkActive]="['active']">
+    <mat-icon mat-list-icon>supervisor_account</mat-icon>
+    <span>Users Account</span>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div class="list-item" (click)="ChangePassword()">
+      <mat-icon mat-list-icon>lock</mat-icon>
+      <span>Change password</span>
+  </div>
+
+  <div class="list-item" (click)="logout()">
+      <mat-icon mat-list-icon>logout</mat-icon>
+      <span>Logout</span>
+  </div>
+
+</mat-list>
+
+<audio #NotificationAudio>
+  <source src="../../../assets/sound/notification-sound.wav" type="audio/wav">
+</audio>

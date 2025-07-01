@@ -1,0 +1,26 @@
+{
+    "$schema": "../../../node_modules/@angular-devkit/schematics/collection-schema.json",
+    "schematics": {
+      "ng-add": {
+        "description": "Add my library to the project.",
+        "factory": "./ng-add/index#ngAdd",
+        "schema": "./ng-add/schema.json"
+      },
+      "ui-feature": {
+        "description": "This schematic generates custemised ui feature",
+        "factory": "./ui-feature/index#ComponentGenerator",
+        "schema": "./ui-feature/schema.json",
+        "aliases": [
+          "suc-ui"
+        ]
+      },
+      "core-feature": {
+        "description": "This schematic generates core feature",
+        "factory": "./core-feature/index#ComponentGenerator",
+        "schema": "./core-feature/schema.json",
+        "aliases": [
+          "suc-core"
+        ]
+      }
+    }
+  }
