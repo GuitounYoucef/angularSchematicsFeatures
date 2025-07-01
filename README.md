@@ -1,27 +1,37 @@
-# AngularFeatures
+# 🔧 Angular Schematics Library for Feature-Based Development
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.4.
+A custom Angular schematics library that accelerates the development of Angular applications by generating predefined, modular features using a single CLI command. Built with **Clean Architecture** principles and following the **Model–View–ViewModel (MVVM)** pattern, this library helps enforce consistency, scalability, and maintainability across your projects.
 
-## Development server
+## 📌 Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+This library is designed to:
 
-## Code scaffolding
+- Reduce Angular development time
+- Provide a clean and scalable application structure
+- Automate feature creation such as:
+  - `core`
+  - `auth`
+  - `posts`
+  - `ui-feature`
+  - etc.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## 🧱 Architecture
 
-## Build
+The schematics are based on:
+- **Clean Architecture**: separation of concerns into `domain`, `data`, and `presentation` layers
+- **MVVM Pattern**: encourages a clear separation between the UI and business logic
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## 🚀 Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 📦 1. Publish the Library Locally Using Verdaccio
 
-## Running end-to-end tests
+Set up a local npm registry to publish and test the library on your machine.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+# Install Verdaccio globally
+npm install --global verdaccio
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Start Verdaccio (runs on http://localhost:4873 by default)
+verdaccio
